@@ -1,0 +1,4 @@
+CREATE USER 'tester'@'localhost' IDENTIFIED BY 'abc123' ;
+CREATE database phylografter ;
+GRANT ALL ON phylografter.* to 'tester'@'localhost' ;
+FLUSH PRIVILEGES;
