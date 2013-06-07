@@ -57,6 +57,30 @@ fi
 
 
 ################################################################################
+# Grab treemachine repo (webapp for tree ingest and name normalization)
+####################
+if test -z "$TREEMACHINE_ROOT"
+then
+    cd "${OPEN_TREE_ROOT}"
+    if ! test -d treemachine
+    then
+         git clone git://github.com/OpenTreeOfLife/treemachine.git || exit
+    fi
+    export TREEMACHINE_ROOT="${OPEN_TREE_ROOT}/treemachine"
+    echo 'export TREEMACHINE_ROOT="${OPEN_TREE_ROOT}/treemachine"' >> /home/vagrant/opentree-shell.sh
+else
+    if ! test -d  "$TREEMACHINE_ROOT"
+    then
+        echo TREEMACHINE_ROOT defined but it does not point to a directory: \" ${TREEMACHINE_ROOT}\"
+        exit 1
+    fi
+fi
+# temp to be replaced with 
+#     sh "${PHYLOGRAFTER_ROOT}/vagrant-provision-treemachine.sh
+# after that script is moved to the treemachine repo
+source /vagrant/vagrant-provision-treemachine.sh
+
+################################################################################
 # Grab phylografter repo (webapp for tree ingest and name normalization)
 ####################
 if test -z "$PHYLOGRAFTER_ROOT"
@@ -80,3 +104,5 @@ fi
 #     sh "${PHYLOGRAFTER_ROOT}/vagrant-provision-phylografter.sh
 # after that script is moved to the phylografter repo
 source /vagrant/vagrant-provision-phylografter.sh
+
+

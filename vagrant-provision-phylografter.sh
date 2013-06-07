@@ -6,6 +6,15 @@ if test -z "${WEB2PY_DB_PASSWD}" \
         -o -z "${PHYLOGRAFTER_DB_DUMP_NAME}" \
         -o -z "${URL_FOR_PHYLOGRAFTER_DB_DUMP}"
 then
+    EXIT_WITH_ERR=1
+fi
+if ! test -d /home/vagrant
+then
+    EXIT_WITH_ERR=1
+fi
+
+if test $EXIT_WITH_ERR = 1
+then
     echo Your environment is not configured correctly.
     echo IMPORTANT: this script is intended to be run from within a vagrant provisioning set-up.
     echo IT WILL OVERWRITE your phylografter configuration files.
