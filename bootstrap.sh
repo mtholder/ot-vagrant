@@ -20,7 +20,7 @@ debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again pa
 apt-get install -y mysql-server-5.5 || exit
 # this uses the shared file created from set-up-web2py-user.mysql.txt.Example in the
 #   opentree-vagrant git repo
-cat >set-up-web2py-user.mysql.txt <<ENDOFHEREDOC
+cat >/vagrant/set-up-web2py-user.mysql.txt <<ENDOFHEREDOC
 CREATE USER '${WEB2PY_DB_USER}'@'localhost' IDENTIFIED BY '${WEB2PY_DB_PASSWD}' ;
 CREATE database phylografter ;
 GRANT ALL ON phylografter.* to '${WEB2PY_DB_USER}'@'localhost' ;
