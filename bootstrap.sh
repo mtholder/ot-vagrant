@@ -56,6 +56,32 @@ else
 fi
 
 
+
+################################################################################
+# Grab taxomachine repo (webapp for tree ingest and name normalization)
+####################
+if test -z "$TAXOMACHINE_ROOT"
+then
+    cd "${OPEN_TREE_ROOT}"
+    if ! test -d taxomachine
+    then
+         git clone git://github.com/OpenTreeOfLife/taxomachine.git || exit
+    fi
+    export TAXOMACHINE_ROOT="${OPEN_TREE_ROOT}/taxomachine"
+    echo 'export TAXOMACHINE_ROOT="${OPEN_TREE_ROOT}/taxomachine"' >> /home/vagrant/opentree-shell.sh
+else
+    if ! test -d  "$TAXOMACHINE_ROOT"
+    then
+        echo TAXOMACHINE_ROOT defined but it does not point to a directory: \" ${TAXOMACHINE_ROOT}\"
+        exit 1
+    fi
+fi
+# temp to be replaced with 
+#     sh "${TAXOMACHINE_ROOT}/vagrant-provision-taxomachine.sh
+# after that script is moved to the taxomachine repo
+source /vagrant/vagrant-provision-taxomachine.sh
+
+
 ################################################################################
 # Grab treemachine repo (webapp for tree ingest and name normalization)
 ####################
@@ -76,9 +102,10 @@ else
     fi
 fi
 # temp to be replaced with 
-#     sh "${PHYLOGRAFTER_ROOT}/vagrant-provision-treemachine.sh
+#     sh "${TREEMACHINE_ROOT}/vagrant-provision-treemachine.sh
 # after that script is moved to the treemachine repo
 source /vagrant/vagrant-provision-treemachine.sh
+
 
 ################################################################################
 # Grab phylografter repo (webapp for tree ingest and name normalization)
