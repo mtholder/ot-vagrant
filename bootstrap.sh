@@ -25,7 +25,7 @@ CREATE database phylografter ;
 GRANT ALL ON phylografter.* to '${WEB2PY_DB_USER}'@'localhost' ;
 FLUSH PRIVILEGES;
 ENDOFHEREDOC
-mysql -u root --password=testBoxMsqlPass < /vagrant/set-up-web2py-user.mysql.txt || exit
+mysql -u root --password=testBoxMsqlPass < /vagrant/set-up-web2py-user.mysql.txt
 
 apt-get install -y git || exit
 
@@ -156,7 +156,13 @@ if ! test -f "${PHYLOGRAFTER_DB_DUMP_NAME}"
 then
     wget "${URL_FOR_PHYLOGRAFTER_DB_DUMP}" || exit
 fi
-bunzip -c $OPEN_TREE/data/phylografter/$PHYLOGRAFTER_DB_DUMP_NAME |  mysql --user ${WEB2PY_DB_USER} --password=${WEB2PY_DB_PASSWD} --max_allowed_packet=300M --connect_timeout=6000 phylografter || exit
+
+# Wrapping this is in an env var because it is slow and we don't want to do it unnecessarily...
+if test -z ${PHYLOGRAFTER_DB_INSTALLED}
+then
+    bunzip2 -c $OPEN_TREE/data/phylografter/$PHYLOGRAFTER_DB_DUMP_NAME |  mysql --user ${WEB2PY_DB_USER} --password=${WEB2PY_DB_PASSWD} --max_allowed_packet=300M --connect_timeout=6000 phylografter || exit
+    echo 'export PHYLOGRAFTER_DB_INSTALLED=1'>> /vagrant/env_with_urls.sh
+fi
 
 # libxml2-dev and libxslt-dev are (apparently) prerequisites for installation
 #       of lxml, but not detected by pip
