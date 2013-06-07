@@ -166,14 +166,19 @@ fi
 
 # libxml2-dev and libxslt-dev are (apparently) prerequisites for installation
 #       of lxml, but not detected by pip
-apt-get install -y libxml2-dev libxslt-dev || exit
-apt-get install -y gfortran || exit
-apt-get install -y liblapack-dev || exit
-easy_install pyparsing==1.5.7 || exit
-for module in numpy scipy biopython ipython lxml PIL requests matplotlib
-do
-    pip install --upgrade "$module" || exit
-done
+apt-get install -y libxml2-dev libxslt-dev || exit # lxml prereq
+apt-get install -y g++ || exit # scipy prereq
+apt-get install -y gfortran || exit # scipy prereq
+apt-get install -y liblapack-dev || exit # scipy prereq
+easy_install pyparsing==1.5.7 || exit # phylografter prereq
+pip install --upgrade numpy || exit  # phylografter prereq
+pip install --upgrade scipy || exit  # phylografter prereq
+pip install --upgrade biopython || exit  # phylografter prereq
+pip install --upgrade ipython || exit  # phylografter prereq
+pip install --upgrade lxml || exit  # phylografter prereq
+pip install --upgrade PIL || exit  # phylografter prereq
+pip install --upgrade requests || exit  # phylografter prereq
+pip install --upgrade matplotlib || exit  # phylografter prereq
 
 cd "${OPEN_TREE}/phylografter"
 cat private/config.example | sed "s/password=12345/password=${WEB2PY_DB_USER}/" | sed "s/user=guest/user=${WEB2PY_DB_USER}/" > private/config 
