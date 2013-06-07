@@ -167,8 +167,10 @@ fi
 # libxml2-dev and libxslt-dev are (apparently) prerequisites for installation
 #       of lxml, but not detected by pip
 apt-get install -y libxml2-dev libxslt-dev || exit
+apt-get install -y gfortran || exit
+apt-get install -y liblapack-dev || exit
 easy_install pyparsing==1.5.7 || exit
-for module in numpy matplotlib scipy biopython ipython lxml PIL requests
+for module in numpy scipy biopython ipython lxml PIL requests matplotlib
 do
     pip install --upgrade "$module" || exit
 done
