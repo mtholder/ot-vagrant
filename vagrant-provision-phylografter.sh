@@ -46,7 +46,7 @@ mysql -u root --password=testBoxMsqlPass < /vagrant/set-up-web2py-user.mysql.txt
 ################################################################################
 # Grab phylografter snapshot of the DB
 #####################
-cd  "${OPEN_TREE_DATA_DIR}" || exit
+cd  "${OPEN_TREE_ROOT/data}" || exit
 if ! test -d phylografter
 then
     mkdir phylografter || exit
@@ -60,7 +60,7 @@ fi
 # Wrapping this is in an env var because it is slow and we don't want to do it unnecessarily...
 if test -z ${PHYLOGRAFTER_DB_INSTALLED}
 then
-    bunzip2 -c $OPEN_TREE_ROOT/data/phylografter/$PHYLOGRAFTER_DB_DUMP_NAME |  mysql --user ${WEB2PY_DB_USER} --password=${WEB2PY_DB_PASSWD} --max_allowed_packet=300M --connect_timeout=6000 phylografter || exit
+    bunzip2 -c ${OPEN_TREE_DATA_DIR}/phylografter/$PHYLOGRAFTER_DB_DUMP_NAME |  mysql --user ${WEB2PY_DB_USER} --password=${WEB2PY_DB_PASSWD} --max_allowed_packet=300M --connect_timeout=6000 phylografter || exit
     echo 'export PHYLOGRAFTER_DB_INSTALLED=1'>> /vagrant/env_with_urls.sh
 fi
 

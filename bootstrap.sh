@@ -15,8 +15,8 @@ apt-get install -y git || exit
 #   that you can "source" when you "vagrant ssh" into the box
 ####################
 echo 'source /vagrant/env_with_urls.sh' > /home/vagrant/opentree-shell.sh || exit
-export OPEN_TREE_ROOT=/vagrant/open-tree || exit
-echo 'export OPEN_TREE_ROOT=/vagrant/open-tree' >> /home/vagrant/opentree-shell.sh || exit
+export OPEN_TREE_ROOT=/home/vagrant/open-tree || exit
+echo 'export OPEN_TREE_ROOT=/home/vagrant/open-tree' >> /home/vagrant/opentree-shell.sh || exit
 if ! test -d "${OPEN_TREE_ROOT}"
 then
     mkdir  "${OPEN_TREE_ROOT}" || exit
