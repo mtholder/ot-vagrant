@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -x
-WEB2PY_DB_USER=tester
-WEB2PY_DB_PASSWD=abc123
+source /vagrant/web2py_passwords.sh
 source /vagrant/env_with_urls.sh || exit
 
 apt-get update || exit
@@ -163,7 +162,7 @@ bunzip -c $OPEN_TREE/data/phylografter/$PHYLOGRAFTER_DB_DUMP_NAME |  mysql --use
 #       of lxml, but not detected by pip
 apt-get install -y libxml2-dev libxslt-dev || exit
 easy_install pyparsing==1.5.7 || exit
-for module in matplotlib numpy scipy biopython ipython lxml PIL requests
+for module in numpy matplotlib scipy biopython ipython lxml PIL requests
 do
     pip install --upgrade "$module" || exit
 done

@@ -6,6 +6,13 @@ This repo has the input files needed to bootstrap a vagrant ( http://www.vagrant
 
 Installation
 ############
+
+In this directory with this README and the bootstrap.sh file add a file with something like the 
+following text with the name "web2py_passwords.sh"
+
+    export WEB2PY_DB_USER=tester
+    export WEB2PY_DB_PASSWD=abc123
+
 After installing vagrant, the commands for booting the virtual machine and logging in are:
 
     $ vagrant up
