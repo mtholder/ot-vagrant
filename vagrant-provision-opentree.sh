@@ -47,33 +47,3 @@ fi
 
 cd "${OPEN_TREE_WEBAPP_ROOT}/webapp"
 cp private/config.local private/config 
-
-################################################################################
-# Grab test suite repo 
-####################
-cd "${OPEN_TREE_ROOT}"
-if ! test -d opentree-testrunner
-then
-    git clone git://github.com/OpenTreeOfLife/opentree-testrunner.git || exit
-fi
-
-################################################################################
-# Get the web2py web framework and set up links to phylografter and opentree
-#   this is all that needs to be done to "install" those web apps into web2py
-####################
-cd "${OPEN_TREE_ROOT}"
-if ! test -d web2py
-then
-    git clone git://github.com/web2py/web2py.git || exit
-fi
-cd web2py || exit
-git checkout R-2.4.6 || exit
-cd applications  || exit
-if ! test -L phylografter
-then
-    ln -s  "${PHYLOGRAFTER_ROOT}" . || exit
-fi
-if ! test -L opentree
-then
-    ln -s  "${OPEN_TREE_WEBAPP_ROOT}" . || exit
-fi
