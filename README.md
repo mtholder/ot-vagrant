@@ -1,17 +1,12 @@
 opentree vagrant
 ################
-This repo has the input files needed to bootstrap a vagrant ( http://www.vagrantup.com/ ) virtual
-machine with the opentree of life software tools
+This repo has the input files needed to bootstrap a vagrant ( http://www.vagrantup.com/ ) virtual machine with the opentree of life software tools. MTH has tested this with VirtualBox ( https://www.virtualbox.org/ ).
+
+*NOTE* the mysql passwords are in plain text in the bootstrap file, so this should not be used for an outward-facing deployment. The default deployment should allow you to connect only via the host machine, so is should not introduce a security hole in your host machine.
 
 Installation
 ############
-After installing vagrant, 
-
-    $ cp set-up-web2py-user.mysql.txt.Example set-up-web2py-user.mysql.txt
-
-Then edit set-up-web2py-user.mysql.txt if you want to change the db passwords used by the web apps
-
-The commands for booting the virtual machine and logging in are:
+After installing vagrant, the commands for booting the virtual machine and logging in are:
 
     $ vagrant up
     $ vagrant ssh
