@@ -29,7 +29,7 @@ if test -f /home/vagrant/.bashrc.BAK
 then
     cp /home/vagrant/.bashrc.BAK /home/vagrant/.bashrc
 else
-    cp /home/vagrant/.bashrc.BAK /home/vagrant/.bashrc
+    cp /home/vagrant/.bashrc /home/vagrant/.bashrc.BAK
 fi
 echo 'source /home/vagrant/opentree-shell.sh' >> /home/vagrant/.bashrc || exit
 
