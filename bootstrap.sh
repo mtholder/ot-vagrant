@@ -62,7 +62,7 @@ fi
 if test -z "$OPEN_TREE_WEBAPP_ROOT"
 then
     cd "${OPEN_TREE_ROOT}"
-    if ! test -d taxomachine
+    if ! test -d opentree
     then
          git clone git://github.com/OpenTreeOfLife/opentree.git || exit
     fi
@@ -178,6 +178,11 @@ if ! test -d opentree-testrunner
 then
     git clone git://github.com/OpenTreeOfLife/opentree-testrunner.git || exit
 fi
+cd opentree-testrunner
+git pull origin
+cp local.conf test.conf
+cd --
+
 
 ################################################################################
 # Get the web2py web framework and set up links to phylografter and opentree
