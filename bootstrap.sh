@@ -56,9 +56,37 @@ else
 fi
 
 
+################################################################################
+# Grab opentree repo (main web app, smasher code that generates OTT, etc)
+####################
+if test -z "$OPEN_TREE_WEBAPP_ROOT"
+then
+    cd "${OPEN_TREE_ROOT}"
+    if ! test -d taxomachine
+    then
+         git clone git://github.com/OpenTreeOfLife/opentree.git || exit
+    fi
+    export OPEN_TREE_WEBAPP_ROOT="${OPEN_TREE_ROOT}/opentree"
+    echo 'export OPEN_TREE_WEBAPP_ROOT="${OPEN_TREE_ROOT}/opentree"' >> /home/vagrant/opentree-shell.sh
+else
+    if ! test -d  "$OPEN_TREE_WEBAPP_ROOT"
+    then
+        echo OPEN_TREE_WEBAPP_ROOT defined but it does not point to a directory: \" ${OPEN_TREE_WEBAPP_ROOT}\"
+        exit 1
+    fi
+fi
+cd "${OPEN_TREE_WEBAPP_ROOT}"
+git pull origin
+cd --
+# temp to be replaced with 
+#     sh "${OPEN_TREE_WEBAPP_ROOT}/vagrant-provision-opentree.sh
+# after that script is moved to the opentree repo
+source /vagrant/vagrant-provision-opentree.sh
+
+
 
 ################################################################################
-# Grab taxomachine repo (webapp for tree ingest and name normalization)
+# Grab taxomachine repo (services, such as TNRS, for dealing with OTT)
 ####################
 if test -z "$TAXOMACHINE_ROOT"
 then
@@ -76,6 +104,9 @@ else
         exit 1
     fi
 fi
+cd "${TAXOMACHINE_ROOT}"
+git pull origin
+cd --
 # temp to be replaced with 
 #     sh "${TAXOMACHINE_ROOT}/vagrant-provision-taxomachine.sh
 # after that script is moved to the taxomachine repo
@@ -83,7 +114,8 @@ source /vagrant/vagrant-provision-taxomachine.sh
 
 
 ################################################################################
-# Grab treemachine repo (webapp for tree ingest and name normalization)
+# Grab treemachine repo (code for setting up and interacting with the Graph
+#   of Life)
 ####################
 if test -z "$TREEMACHINE_ROOT"
 then
@@ -101,6 +133,9 @@ else
         exit 1
     fi
 fi
+cd "${TREEMACHINE_ROOT}"
+git pull origin
+cd --
 # temp to be replaced with 
 #     sh "${TREEMACHINE_ROOT}/vagrant-provision-treemachine.sh
 # after that script is moved to the treemachine repo
@@ -126,7 +161,9 @@ else
         exit 1
     fi
 fi
-
+cd "${PHYLOGRAFTER_ROOT}"
+git pull origin
+cd --
 # temp to be replaced with 
 #     sh "${PHYLOGRAFTER_ROOT}/vagrant-provision-phylografter.sh
 # after that script is moved to the phylografter repo
