@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -x
-
+WEB2PY_DB_USER=tester
+WEB2PY_DB_PASSWD=abc123
 source /vagrant/env_with_urls.sh || exit
 
 apt-get update || exit
@@ -19,6 +20,12 @@ debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again pa
 apt-get install -y mysql-server-5.5 || exit
 # this uses the shared file created from set-up-web2py-user.mysql.txt.Example in the
 #   opentree-vagrant git repo
+cat >set-up-web2py-user.mysql.txt <<ENDOFHEREDOC
+CREATE USER '${WEB2PY_DB_USER}'@'localhost' IDENTIFIED BY '${WEB2PY_DB_PASSWD}' ;
+CREATE database phylografter ;
+GRANT ALL ON phylografter.* to '${WEB2PY_DB_USER}'@'localhost' ;
+FLUSH PRIVILEGES;
+ENDOFHEREDOC
 mysql -u root --password=testBoxMsqlPass < /vagrant/set-up-web2py-user.mysql.txt || exit
 
 apt-get install -y git || exit
@@ -150,7 +157,7 @@ if ! test -f "${PHYLOGRAFTER_DB_DUMP_NAME}"
 then
     wget "${URL_FOR_PHYLOGRAFTER_DB_DUMP}" || exit
 fi
-bunzip -c $OPEN_TREE/data/phylografter/$PHYLOGRAFTER_DB_DUMP_NAME |  mysql --user tester --password=abc123 --max_allowed_packet=300M --connect_timeout=6000 phylografter || exit
+bunzip -c $OPEN_TREE/data/phylografter/$PHYLOGRAFTER_DB_DUMP_NAME |  mysql --user ${WEB2PY_DB_USER} --password=${WEB2PY_DB_PASSWD} --max_allowed_packet=300M --connect_timeout=6000 phylografter || exit
 
 # libxml2-dev and libxslt-dev are (apparently) prerequisites for installation
 #       of lxml, but not detected by pip
@@ -160,3 +167,6 @@ for module in matplotlib numpy scipy biopython ipython lxml PIL requests
 do
     pip install --upgrade "$module" || exit
 done
+
+cd "${OPEN_TREE}/phylografter"
+cat private/config.example | sed "s/password=12345/password=${WEB2PY_DB_USER}/" | sed "s/user=guest/user=${WEB2PY_DB_USER}/" > private/config 
