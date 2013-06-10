@@ -1,0 +1,3 @@
+#!/bin/sh
+cd "$OPEN_TREE_ROOT/web2py"
+stop-web2py && python web2py.py --nogui -a '<recycle>' -v >httpserver-out.txt 2>httpserver-err.txt & 

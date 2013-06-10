@@ -1,0 +1,7 @@
+#!/bin/sh
+if test -z ${TAXOMACHINE_NEO4J_HOME}
+then
+    echo TAXOMACHINE_NEO4J_HOME must be in your env to find the tree machine jar.
+    exit 1
+fi
+$TAXOMACHINE_NEO4J_HOME/bin/neo4j restart

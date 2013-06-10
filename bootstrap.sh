@@ -204,3 +204,30 @@ if ! test -L opentree
 then
     ln -s  "${OPEN_TREE_WEBAPP_ROOT}" . || exit
 fi
+
+cd "${OPEN_TREE_ROOT}"
+
+if test -f "${NEO4J_TAR_BALL}"
+then
+    if ! test -d neo4j-community-1.9.M05-treemachine
+    then
+        tar xfvz "${NEO4J_TAR_BALL}"
+        mv neo4j-community-1.9.M05 neo4j-community-1.9.M05-treemachine
+        export TREEMACHINE_NEO4J_HOME="${OPEN_TREE_ROOT}/neo4j-community-1.9.M05-treemachine"
+        echo "export TREEMACHINE_NEO4J_HOME=\"${TREEMACHINE_NEO4J_HOME}\"" >> /home/vagrant/opentree-shell.sh
+    fi
+    if ! test -d neo4j-community-1.9.M05-taxomachine
+    then
+        tar xfvz "${NEO4J_TAR_BALL}"
+        mv neo4j-community-1.9.M05 neo4j-community-1.9.M05-taxomachine
+        export TAXOMACHINE_NEO4J_HOME="${OPEN_TREE_ROOT}/neo4j-community-1.9.M05-taxomachine"
+        echo "export TAXOMACHINE_NEO4J_HOME=\"${TAXOMACHINE_NEO4J_HOME}\"" >> /home/vagrant/opentree-shell.sh
+    fi
+fi
+
+chown -R vagrant:vagrant "${OPEN_TREE_ROOT}"
+chown vagrant:vagrant "/home/vagrant/opentree-shell.sh"
+chown vagrant:vagrant /home/vagrant/.bashrc.BAK
+chown vagrant:vagrant /home/vagrant/.bashrc
+chown -R vagrant:vagrant ~/.cache 
+chown -R vagrant:vagrant ~/.m2  

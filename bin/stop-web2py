@@ -1,0 +1,17 @@
+#!/bin/sh
+cd $OPEN_TREE/web2py
+for ((i=0; i < 10; i++))
+do
+    if test -f httpserver.pid
+    then
+    if test $i -lt 9
+    then
+        echo killing server with PID of $(cat httpserver.pid)
+        kill $(cat httpserver.pid)
+        sleep 1
+    else
+        echo "multiple attempts to kill the server running with with PID of" $(cat httpserver.pid) "failed."
+        echo 'The server has NOT been restarted!'
+        exit 1
+    fi
+done

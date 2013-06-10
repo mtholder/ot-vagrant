@@ -1,0 +1,8 @@
+#!/bin/sh
+if test -z ${TAXOMACHINE_ROOT}
+then
+    echo TAXOMACHINE_ROOT must be in your env to find the tree machine jar.
+    exit 1
+fi
+cd "$TAXOMACHINE_ROOT"
+sh reinstall-plugins.sh

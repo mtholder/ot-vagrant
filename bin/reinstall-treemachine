@@ -1,0 +1,8 @@
+#!/bin/sh
+if test -z ${TREEMACHINE_ROOT}
+then
+    echo TREEMACHINE_ROOT must be in your env to find the tree machine jar.
+    exit 1
+fi
+cd "$TREEMACHINE_ROOT"
+sh reinstall-plugins.sh
