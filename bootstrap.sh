@@ -10,8 +10,8 @@ source $VAGRANT_SHARED_DIR/env_with_urls.sh || exit
 
 apt-get update || exit
 apt-get install -y apache2 || exit
-rm -rf /var/www || exit
-ln -fs $VAGRANT_SHARED_DIR /var/www || exit
+echo "Commented out:  rm -rf /var/www"
+echo "Commented out:  ln -fs $VAGRANT_SHARED_DIR /var/www"
 apt-get install -y git || exit
 
 
