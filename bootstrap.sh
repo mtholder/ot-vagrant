@@ -5,7 +5,7 @@ then
     export VAGRANT_SHARED_DIR=/vagrant
     export VAGRANT_HOME_DIR=/home/vagrant
 fi
-source $VAGRANT_SHARED_DIR/web2py_passwords.sh
+source $VAGRANT_SHARED_DIR/web2py_passwords.sh || exit
 source $VAGRANT_SHARED_DIR/env_with_urls.sh || exit
 
 apt-get update || exit
