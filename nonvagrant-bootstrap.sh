@@ -8,5 +8,4 @@ fi
 
 export VAGRANT_SHARED_DIR="$PWD"
 export VAGRANT_HOME_DIR="$PWD/ nonvagrant-user"
-sh bootstrap.sh
-ls
+bash bootstrap.sh
