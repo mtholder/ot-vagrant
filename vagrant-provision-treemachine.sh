@@ -3,7 +3,7 @@ if test -z "${TREEMACHINE_ROOT}"
 then
     EXIT_WITH_ERR=1
 fi
-if ! test -d /home/vagrant
+if ! test -d ${VAGRANT_HOME_DIR}
 then
     EXIT_WITH_ERR=1
 fi
@@ -19,8 +19,13 @@ fi
 set -x
 
 apt-get install -y openjdk-7-jdk || exit
-export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-i386 || exit
-echo 'export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-i386' >> /home/vagrant/opentree-shell.sh || exit
+if true
+then
+     export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64 || exit
+else
+    export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-i386 || exit
+fi
+echo "export JAVA_HOME=\"$JAVA_HOME\"" >> ${VAGRANT_HOME_DIR}/opentree-shell.sh || exit
 apt-get install -y maven || exit
 
 cd "${TREEMACHINE_ROOT}" || exit

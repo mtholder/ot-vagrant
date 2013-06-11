@@ -8,7 +8,7 @@ if test -z "${WEB2PY_DB_PASSWD}" \
 then
     EXIT_WITH_ERR=1
 fi
-if ! test -d /home/vagrant
+if ! test -d ${VAGRANT_HOME_DIR}
 then
     EXIT_WITH_ERR=1
 fi
@@ -35,13 +35,13 @@ debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again pa
 apt-get install -y mysql-server-5.5 || exit
 # this uses the shared file created from set-up-web2py-user.mysql.txt.Example in the
 #   opentree-vagrant git repo
-cat >/vagrant/set-up-web2py-user.mysql.txt <<ENDOFHEREDOC
+cat >$VAGRANT_SHARED_DIR/set-up-web2py-user.mysql.txt <<ENDOFHEREDOC
 CREATE USER '${WEB2PY_DB_USER}'@'localhost' IDENTIFIED BY '${WEB2PY_DB_PASSWD}' ;
 CREATE database phylografter ;
 GRANT ALL ON phylografter.* to '${WEB2PY_DB_USER}'@'localhost' ;
 FLUSH PRIVILEGES;
 ENDOFHEREDOC
-mysql -u root --password=testBoxMsqlPass < /vagrant/set-up-web2py-user.mysql.txt
+mysql -u root --password=testBoxMsqlPass < $VAGRANT_SHARED_DIR/set-up-web2py-user.mysql.txt
 
 ################################################################################
 # Grab phylografter snapshot of the DB
@@ -61,7 +61,7 @@ fi
 if test -z ${PHYLOGRAFTER_DB_INSTALLED}
 then
     bunzip2 -c ${OPEN_TREE_DATA_DIR}/phylografter/$PHYLOGRAFTER_DB_DUMP_NAME |  mysql --user ${WEB2PY_DB_USER} --password=${WEB2PY_DB_PASSWD} --max_allowed_packet=300M --connect_timeout=6000 phylografter || exit
-    echo 'export PHYLOGRAFTER_DB_INSTALLED=1'>> /vagrant/env_with_urls.sh
+    echo 'export PHYLOGRAFTER_DB_INSTALLED=1'>> $VAGRANT_SHARED_DIR/env_with_urls.sh
 fi
 
 apt-get install -y libxml2-dev libxslt-dev || exit # lxml prereq

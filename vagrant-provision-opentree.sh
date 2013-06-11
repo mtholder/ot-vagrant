@@ -9,7 +9,7 @@ if test -z "${WEB2PY_DB_PASSWD}" \
 then
     EXIT_WITH_ERR=1
 fi
-if ! test -d /home/vagrant
+if ! test -d ${VAGRANT_HOME_DIR}
 then
     EXIT_WITH_ERR=1
 fi
