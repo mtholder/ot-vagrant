@@ -7,5 +7,6 @@ then
 fi
 
 export VAGRANT_SHARED_DIR="$PWD"
-export VAGRANT_HOME_DIR="$PWD/ nonvagrant-user"
+export VAGRANT_HOME_DIR="$PWD/nonvagrant-user"
 bash bootstrap.sh
+git 
