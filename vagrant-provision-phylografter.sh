@@ -46,7 +46,7 @@ mysql -u root --password=testBoxMsqlPass < $VAGRANT_SHARED_DIR/set-up-web2py-use
 ################################################################################
 # Grab phylografter snapshot of the DB
 #####################
-cd  "${OPEN_TREE_ROOT/data}" || exit
+cd  "${OPEN_TREE_DATA_DIR}" || exit
 if ! test -d phylografter
 then
     mkdir phylografter || exit
