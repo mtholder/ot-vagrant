@@ -6,7 +6,7 @@ then
     exit 1
 fi
 
-export VAGRANT_SHARED="$PWD"
+export VAGRANT_SHARED_DIR="$PWD"
 export VAGRANT_HOME_DIR="$PWD/ nonvagrant-user"
 sh bootstrap.sh
-
+ls
