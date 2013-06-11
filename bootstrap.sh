@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -x
-if test -z $VAGRANT_SHARED
+if test -z $VAGRANT_SHARED_DIR
 then
     export VAGRANT_SHARED_DIR=/vagrant
     export VAGRANT_HOME_DIR=/home/vagrant
