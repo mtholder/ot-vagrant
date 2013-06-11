@@ -36,7 +36,7 @@ then
 else
     cp ${VAGRANT_HOME_DIR}/.bashrc ${VAGRANT_HOME_DIR}/.bashrc.BAK
 fi
-echo 'source ${VAGRANT_HOME_DIR}/opentree-shell.sh' >> ${VAGRANT_HOME_DIR}/.bashrc || exit
+echo "source ${VAGRANT_HOME_DIR}/opentree-shell.sh" >> ${VAGRANT_HOME_DIR}/.bashrc || exit
 
 
 ################################################################################
