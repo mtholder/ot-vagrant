@@ -19,7 +19,7 @@ apt-get install -y git || exit
 # set up some helpful env vars and store them in an opentree-shell.sh file in the home
 #   that you can "source" when you "vagrant ssh" into the box
 ####################
-echo 'source $VAGRANT_SHARED_DIR/env_with_urls.sh' > ${VAGRANT_HOME_DIR}/opentree-shell.sh || exit
+echo "source $VAGRANT_SHARED_DIR/env_with_urls.sh" > ${VAGRANT_HOME_DIR}/opentree-shell.sh || exit
 export OPEN_TREE_ROOT=${VAGRANT_HOME_DIR}/open-tree || exit
 echo "export OPEN_TREE_ROOT=${VAGRANT_HOME_DIR}/open-tree" >> ${VAGRANT_HOME_DIR}/opentree-shell.sh || exit
 if ! test -d "${OPEN_TREE_ROOT}"
