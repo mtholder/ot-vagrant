@@ -30,5 +30,14 @@ apt-get install -y maven || exit
 cd "${TAXOMACHINE_ROOT}" || exit
 sh mvn_install_forester.sh || exit
 sh mvn_cmdline.sh || exit
-
+# read in the ott2.0 into the taxomachine
+java -Xmx10g \
+     -XX:-UseConcMarkSweepGC \
+     -Dopentree.taxomachine.num.transactions=1000 \
+     -jar target/taxomachine-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
+     loadtaxsyn \
+     ott \
+     "$OPEN_TREE_DATA_DIR/ott/$OTT_WITH_VERSION_NAME/taxonomy" \
+     "$OPEN_TREE_DATA_DIR/ott/$OTT_WITH_VERSION_NAME/synonyms" \
+     "$TAXOMACHINE_NEO4J_HOME/data/ott.db"
 sh mvn_serverplugins.sh || exit
