@@ -91,18 +91,18 @@ source $VAGRANT_SHARED_DIR/vagrant-provision-opentree.sh
 
 cd "${OPEN_TREE_ROOT}"
 
-if test -z "NEO4J_TAR_BALL"
+if test -z "NEO4J_TARBALL"
 then
-    export NEO4J_TAR_BALL="$PWD/$NEO4J_TARBALL_NAME"
+    export NEO4J_TARBALL="$PWD/$NEO4J_TARBALL_NAME"
 fi
-if ! test -f "${NEO4J_TAR_BALL}"
+if ! test -f "${NEO4J_TARBALL}"
 then
     wget -O "$NEO4J_TARBALL_NAME" "$URL_FOR_NEO4J"
 fi
 
 if ! test -d neo4j-community-1.9.M05-treemachine
 then
-    tar xfvz "${NEO4J_TAR_BALL}"
+    tar xfvz "${NEO4J_TARBALL}"
     mv "$NEO4J_TARBALL_UNPACKED_NAME" neo4j-community-1.9-treemachine
     export TREEMACHINE_NEO4J_HOME="${OPEN_TREE_ROOT}/neo4j-community-1.9-treemachine"
     echo "export TREEMACHINE_NEO4J_HOME=\"${TREEMACHINE_NEO4J_HOME}\"" >> ${VAGRANT_HOME_DIR}/opentree-shell.sh
@@ -110,7 +110,7 @@ then
 fi
 if ! test -d neo4j-community-1.9.M05-taxomachine
 then
-    tar xfvz "${NEO4J_TAR_BALL}"
+    tar xfvz "${NEO4J_TARBALL}"
     mv "$NEO4J_TARBALL_UNPACKED_NAME" neo4j-community-1.9-taxomachine
     export TAXOMACHINE_NEO4J_HOME="${OPEN_TREE_ROOT}/neo4j-community-1.9-taxomachine"
     echo "export TAXOMACHINE_NEO4J_HOME=\"${TAXOMACHINE_NEO4J_HOME}\"" >> ${VAGRANT_HOME_DIR}/opentree-shell.sh
