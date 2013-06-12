@@ -1,5 +1,5 @@
 #!/bin/sh
-if test -z "${TREEMACHINE_ROOT}" -o "${TREEMACHINE_NEO4J_HOME}"
+if test -z "${TREEMACHINE_ROOT}" -o test -z "${TREEMACHINE_NEO4J_HOME}"
 then
     EXIT_WITH_ERR=1
 fi
