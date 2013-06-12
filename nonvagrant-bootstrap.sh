@@ -10,5 +10,8 @@ export VAGRANT_SHARED_DIR="$PWD"
 export VAGRANT_HOME_DIR="$PWD/nonvagrant-user"
 export VAGRANT_USERNAME="$USER"
 
-echo about to run "sudo bash bootstrap.sh"
-sudo bash bootstrap.sh
+echo about to run "sudo bash bootstrap.sh" ...
+sudo VAGRANT_SHARED_DIR="$VAGRANT_SHARED_DIR" \
+    VAGRANT_HOME_DIR="$VAGRANT_HOME_DIR" \
+    VAGRANT_USERNAME="$VAGRANT_USERNAME" \
+    bash bootstrap.sh
