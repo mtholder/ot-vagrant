@@ -4,6 +4,7 @@ if test -z $VAGRANT_SHARED_DIR
 then
     export VAGRANT_SHARED_DIR=/vagrant
     export VAGRANT_HOME_DIR=/home/vagrant
+    export VAGRANT_USERNAME="vagrant"
 fi
 source $VAGRANT_SHARED_DIR/web2py_passwords.sh || exit
 source $VAGRANT_SHARED_DIR/env_with_urls.sh || exit
@@ -90,25 +91,32 @@ source $VAGRANT_SHARED_DIR/vagrant-provision-opentree.sh
 
 cd "${OPEN_TREE_ROOT}"
 
-if test -f "${NEO4J_TAR_BALL}"
+if test -z "NEO4J_TAR_BALL"
 then
-    if ! test -d neo4j-community-1.9.M05-treemachine
-    then
-        tar xfvz "${NEO4J_TAR_BALL}"
-        mv neo4j-community-1.9.M05 neo4j-community-1.9.M05-treemachine
-        export TREEMACHINE_NEO4J_HOME="${OPEN_TREE_ROOT}/neo4j-community-1.9.M05-treemachine"
-        echo "export TREEMACHINE_NEO4J_HOME=\"${TREEMACHINE_NEO4J_HOME}\"" >> ${VAGRANT_HOME_DIR}/opentree-shell.sh
-        chown -R vagrant:vagrant "${TREEMACHINE_NEO4J_HOME}"
-    fi
-    if ! test -d neo4j-community-1.9.M05-taxomachine
-    then
-        tar xfvz "${NEO4J_TAR_BALL}"
-        mv neo4j-community-1.9.M05 neo4j-community-1.9.M05-taxomachine
-        export TAXOMACHINE_NEO4J_HOME="${OPEN_TREE_ROOT}/neo4j-community-1.9.M05-taxomachine"
-        echo "export TAXOMACHINE_NEO4J_HOME=\"${TAXOMACHINE_NEO4J_HOME}\"" >> ${VAGRANT_HOME_DIR}/opentree-shell.sh
-        chown -R vagrant:vagrant "${TAXOMACHINE_NEO4J_HOME}"
-    fi
+    export NEO4J_TAR_BALL="$PWD/$NEO4J_TARBALL_NAME"
 fi
+if ! test -f "${NEO4J_TAR_BALL}"
+then
+    wget -O "$NEO4J_TARBALL_NAME" "$URL_FOR_NEO4J"
+fi
+
+if ! test -d neo4j-community-1.9.M05-treemachine
+then
+    tar xfvz "${NEO4J_TAR_BALL}"
+    mv "$NEO4J_TARBALL_UNPACKED_NAME" neo4j-community-1.9-treemachine
+    export TREEMACHINE_NEO4J_HOME="${OPEN_TREE_ROOT}/neo4j-community-1.9-treemachine"
+    echo "export TREEMACHINE_NEO4J_HOME=\"${TREEMACHINE_NEO4J_HOME}\"" >> ${VAGRANT_HOME_DIR}/opentree-shell.sh
+    chown -R "$VAGRANT_USERNAME" "${TREEMACHINE_NEO4J_HOME}"
+fi
+if ! test -d neo4j-community-1.9.M05-taxomachine
+then
+    tar xfvz "${NEO4J_TAR_BALL}"
+    mv "$NEO4J_TARBALL_UNPACKED_NAME" neo4j-community-1.9-taxomachine
+    export TAXOMACHINE_NEO4J_HOME="${OPEN_TREE_ROOT}/neo4j-community-1.9-taxomachine"
+    echo "export TAXOMACHINE_NEO4J_HOME=\"${TAXOMACHINE_NEO4J_HOME}\"" >> ${VAGRANT_HOME_DIR}/opentree-shell.sh
+    chown -R "$VAGRANT_USERNAME" "${TAXOMACHINE_NEO4J_HOME}"
+fi
+
 
 
 ################################################################################
@@ -233,11 +241,11 @@ then
 fi
 
 
-chown -R vagrant:vagrant "${OPEN_TREE_ROOT}"
-chown vagrant:vagrant "${VAGRANT_HOME_DIR}/opentree-shell.sh"
-chown vagrant:vagrant ${VAGRANT_HOME_DIR}/.bashrc.BAK
-chown vagrant:vagrant ${VAGRANT_HOME_DIR}/.bashrc
-chown -R vagrant:vagrant ${VAGRANT_HOME_DIR}/.cache 
-chown -R vagrant:vagrant ${VAGRANT_HOME_DIR}/.m2
-chown -R vagrant:vagrant "${TAXOMACHINE_NEO4J_HOME}"
-chown -R vagrant:vagrant "${TREEOMACHINE_NEO4J_HOME}"
+chown -R "$VAGRANT_USERNAME" "${OPEN_TREE_ROOT}"
+chown "$VAGRANT_USERNAME" "${VAGRANT_HOME_DIR}/opentree-shell.sh"
+chown "$VAGRANT_USERNAME" ${VAGRANT_HOME_DIR}/.bashrc.BAK
+chown "$VAGRANT_USERNAME" ${VAGRANT_HOME_DIR}/.bashrc
+chown -R "$VAGRANT_USERNAME" ${VAGRANT_HOME_DIR}/.cache 
+chown -R "$VAGRANT_USERNAME" ${VAGRANT_HOME_DIR}/.m2
+chown -R "$VAGRANT_USERNAME" "${TAXOMACHINE_NEO4J_HOME}"
+chown -R "$VAGRANT_USERNAME" "${TREEOMACHINE_NEO4J_HOME}"

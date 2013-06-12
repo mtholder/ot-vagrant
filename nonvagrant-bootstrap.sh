@@ -8,5 +8,7 @@ fi
 
 export VAGRANT_SHARED_DIR="$PWD"
 export VAGRANT_HOME_DIR="$PWD/nonvagrant-user"
-bash bootstrap.sh
-git 
+export VAGRANT_USERNAME="$USER"
+
+echo about to run "sudo bash bootstrap.sh"
+sudo bash bootstrap.sh
