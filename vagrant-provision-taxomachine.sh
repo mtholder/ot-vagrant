@@ -31,7 +31,7 @@ cd "${TAXOMACHINE_ROOT}" || exit
 sh mvn_install_forester.sh || exit
 sh mvn_cmdline.sh || exit
 # read in the ott2.0 into the taxomachine
-dcho skipping java -Xmx10g \
+java -Xmx10g \
      -XX:-UseConcMarkSweepGC \
      -Dopentree.taxomachine.num.transactions=1000 \
      -jar target/taxomachine-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
