@@ -19,12 +19,6 @@ fi
 set -x
 
 apt-get install -y openjdk-7-jdk || exit
-if true
-then
-     export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64 || exit
-else
-    export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-i386 || exit
-fi
 apt-get install -y maven || exit
 
 cd "${TAXOMACHINE_ROOT}" || exit

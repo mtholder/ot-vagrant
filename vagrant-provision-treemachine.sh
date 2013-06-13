@@ -19,13 +19,6 @@ fi
 set -x
 
 apt-get install -y openjdk-7-jdk || exit
-if true
-then
-     export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64 || exit
-else
-    export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-i386 || exit
-fi
-echo "export JAVA_HOME=\"$JAVA_HOME\"" >> ${VAGRANT_HOME_DIR}/opentree-shell.sh || exit
 apt-get install -y maven || exit
 
 cd "${TREEMACHINE_ROOT}" || exit
