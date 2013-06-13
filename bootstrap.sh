@@ -100,17 +100,17 @@ then
     wget -O "$NEO4J_TARBALL_NAME" "$URL_FOR_NEO4J"
 fi
 
-if ! test -d neo4j-community-1.9.M05-treemachine
+if ! test -d neo4j-community-1.9-treemachine
 then
-    tar xfvz "${NEO4J_TARBALL}"
+    tar xfvz "${NEO4J_TARBALL_NAME}"
     mv "$NEO4J_TARBALL_UNPACKED_NAME" neo4j-community-1.9-treemachine
     export TREEMACHINE_NEO4J_HOME="${OPEN_TREE_ROOT}/neo4j-community-1.9-treemachine"
     echo "export TREEMACHINE_NEO4J_HOME=\"${TREEMACHINE_NEO4J_HOME}\"" >> ${VAGRANT_HOME_DIR}/opentree-shell.sh
     chown -R "$VAGRANT_USERNAME" "${TREEMACHINE_NEO4J_HOME}"
 fi
-if ! test -d neo4j-community-1.9.M05-taxomachine
+if ! test -d neo4j-community-1.9-taxomachine
 then
-    tar xfvz "${NEO4J_TARBALL}"
+    tar xfvz "${NEO4J_TARBALL_NAME}"
     mv "$NEO4J_TARBALL_UNPACKED_NAME" neo4j-community-1.9-taxomachine
     export TAXOMACHINE_NEO4J_HOME="${OPEN_TREE_ROOT}/neo4j-community-1.9-taxomachine"
     echo "export TAXOMACHINE_NEO4J_HOME=\"${TAXOMACHINE_NEO4J_HOME}\"" >> ${VAGRANT_HOME_DIR}/opentree-shell.sh
