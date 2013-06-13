@@ -1,0 +1,10 @@
+#!/bin/sh
+if test -z ${TREEMACHINE_ROOT}
+then
+    echo TREEMACHINE_ROOT must be in your env to find the treemachine jar.
+    exit 1
+fi
+set -x
+cd "$TREEMACHINE_ROOT" || exit
+mvn -f pom.serverplugins.xml clean compile package jar:jar || exit
+cp target/*.jar "$TREEMACHINE_NEO4J_HOME/plugins/"

@@ -1,0 +1,11 @@
+#!/bin/sh
+if test -z ${TAXOMACHINE_ROOT}
+then
+    echo TAXOMACHINE_ROOT must be in your env to find the taxomachine jar.
+    exit 1
+fi
+set -x
+java $TAXOMACHINE_JAVA_OPTS \
+     $TAXOMACHINE_PROPERTIES \
+     -jar "${TAXOMACHINE_ROOT}/target/taxomachine-0.0.1-SNAPSHOT-jar-with-dependencies.jar" \
+     "$@"

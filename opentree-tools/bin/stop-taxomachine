@@ -1,0 +1,8 @@
+#!/bin/sh
+if test -z $TAXOMACHINE_NEO4J_HOME
+then
+	echo TAXOMACHINE_NEO4J_HOME must be in your env
+	exit 1
+fi
+set -x 
+$TAXOMACHINE_NEO4J_HOME/bin/neo4j stop

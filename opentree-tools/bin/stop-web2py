@@ -1,0 +1,27 @@
+#!/bin/bash
+if test -z ${OPEN_TREE_ROOT}
+then
+    echo "OPEN_TREE_ROOT must be in your env to find the web2py dir"
+    exit 1
+fi
+set -x
+cd $OPEN_TREE_ROOT/web2py || exit
+for ((i=0; i < 10; i++))
+do
+    if test -f httpserver.pid
+    then
+        if test $i -lt 9
+        then
+            echo killing server with PID of $(cat httpserver.pid)
+            kill $(cat httpserver.pid)
+            sleep 1
+        else
+            echo "multiple attempts to kill the server running with with PID of" $(cat httpserver.pid) "failed."
+            echo 'The server has NOT been restarted!'
+            exit 1
+        fi
+    else
+        echo "web2py is not running (anymore) at $OPEN_TREE_ROOT/web2py"
+        exit 0
+    fi
+done

@@ -1,0 +1,7 @@
+#!/bin/sh
+if test -z ${TREEMACHINE_NEO4J_HOME}
+then
+    echo TREEMACHINE_NEO4J_HOME must be in your env to find the treemachine jar.
+    exit 1
+fi
+$TREEMACHINE_NEO4J_HOME/bin/neo4j restart
