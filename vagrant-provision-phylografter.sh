@@ -80,7 +80,7 @@ pip install --upgrade lxml || exit  # phylografter prereq
 pip install --upgrade PIL || exit  # phylografter prereq
 pip install --upgrade requests || exit  # phylografter prereq
 pip install --upgrade matplotlib || exit  # phylografter prereq
-
+pip install --upgrade pyenchant || exit # phylografter prereq
 cd "${PHYLOGRAFTER_ROOT}"
 cat private/config.example | sed "s/password=12345/password=${WEB2PY_DB_PASSWD}/" | sed "s/user=guest/user=${WEB2PY_DB_USER}/" > private/config 
 
