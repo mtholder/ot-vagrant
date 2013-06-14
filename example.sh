@@ -1,3 +1,6 @@
+# Script for use on a virtual machine that is not launched via vagrant...
+# still not quite working...
+
 sudo apt-get install git
 git clone git://github.com/mtholder/ot-vagrant.git
 cd ot-vagrant/

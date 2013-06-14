@@ -4,7 +4,9 @@ opentree vagrant
 
 This repo has the input files needed to bootstrap a vagrant ( http://www.vagrantup.com/ ) virtual machine with the opentree of life software tools. MTH has tested this with VirtualBox ( https://www.virtualbox.org/ ). It is not working there, due to memory-heavy processed getting killed.
 
-I have unning Ubuntu 12.04 Updated NoGUI v1
+I (MTH) have been running these scripts on an iPlant Atmosphere virtual machine 
+with the "Ubuntu 12.04 Updated NoGUI v1" image. I have been running a tweak of the 
+example.sh script. It is not quite there, but it is getting close to working.
 
 *NOTE* the mysql passwords are in plain text in the bootstrap file, so this should not be used for an outward-facing deployment. The default deployment should allow you to connect only via the host machine, so is should not introduce a security hole in your host machine.
 
