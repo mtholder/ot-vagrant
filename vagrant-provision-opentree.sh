@@ -28,7 +28,6 @@ apt-get install -y python-dev || exit
 apt-get install -y python-setuptools || exit
 easy_install pip || exit
 
-
 ################################################################################
 # Grab the open tree taxonomy (OTT) dump See docs at https://github.com/OpenTreeOfLife/opentree/wiki/Open-Tree-Taxonomy
 #####################
@@ -44,6 +43,8 @@ then
     tar xfvz "${OTT_WITH_VERSION_NAME}.tgz" || exit
 fi
 
+cd "${OPEN_TREE_WEBAPP_ROOT}"
+pip install -r requirements.txt
 
 cd "${OPEN_TREE_WEBAPP_ROOT}/webapp"
 cp private/config.local private/config 
