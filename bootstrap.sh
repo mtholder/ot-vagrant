@@ -235,7 +235,7 @@ then
 fi
 if ! test -L opentree
 then
-    ln -s  "${OPEN_TREE_WEBAPP_ROOT}" . || exit
+    ln -s  "${OPEN_TREE_WEBAPP_ROOT}/webapp" . || exit
 fi
 
 
