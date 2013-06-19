@@ -1,0 +1,13 @@
+#!/bin/sh
+
+syn="$1"
+text=$(grep -P "^${syn}\t" "$OPEN_TREE_DATA_DIR/ott/${OTT_WITH_VERSION_NAME}/synonyms")
+if test -z "$text"
+then
+    echo "The name \"${syn}\" is not a synonym (according to OTT)"
+else
+    ott_id=$(echo "${text}" | sed -e 's/[^|]*|\t//' | awk '{print $1}')
+    valid=$(grep -P "^${ott_id}\t" "$OPEN_TREE_DATA_DIR/ott/${OTT_WITH_VERSION_NAME}/taxonomy")
+    resolved="$(echo "${valid}" | sed -e 's/[^|]*|[^|]*|\t//' | sed -e 's/\t*|.*//')"
+    echo "\"${syn}\" is a synonym for \"${resolved}\" (OTT_ID = ${ott_id})" 
+fi
