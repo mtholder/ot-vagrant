@@ -30,8 +30,8 @@ then
         -XX:-UseConcMarkSweepGC \
         -jar target/taxomachine-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
         inittax \
-        "${OPEN_TREE_DATA_DIR}/taxonomy" \
-        "${OPEN_TREE_DATA_DIR}/synonyms" \
+        "${OPEN_TREE_DATA_DIR}/ott/${OTT_WITH_VERSION_NAME}/taxonomy" \
+        "${OPEN_TREE_DATA_DIR}/ott/${OTT_WITH_VERSION_NAME}/synonyms" \
         "${TREEMACHINE_NEO4J_HOME}/data/gol.db"
 
     # add the metadatanode
